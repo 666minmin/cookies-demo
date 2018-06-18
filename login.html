@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录页面</title>
+    <style>
+        *{margin: 0;padding: 0}
+        *{box-sizing: border-box}
+        body{
+            border: 1px solid red;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #loginForm div{
+           margin: 10px;
+        }
+        #loginForm div>span{
+            color:red;
+        }
+        #loginForm label{
+            display: inline-block;
+            min-width: 4em;
+        }
+        #loginForm input{
+            padding: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>登录</h1>
+    <form id="loginForm">
+        <div>
+            <label for="username">用户名</label>
+            <input type="text" name="username">
+            <span></span>
+        </div>
+        <div>
+            <label for="password">密码</label>
+            <input type="password" name="password">
+            <span></span>
+        </div>
+        <div>
+            <input type="submit" value="登录">
+            <input type="button" value="马上注册" id="registerBtn">
+        </div>
+
+    </form>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        let hash={};
+        $("#loginForm").on("submit",function(e){
+            e.preventDefault();
+            let items=['username','password'];
+            items.forEach((item)=>{
+              let value=$("#loginForm").find(`input[name=${item}]`).val();
+              hash[item]=value;  
+            });
+            $.post("/login",hash)
+            .then((response)=>{
+               console.log(response);
+               console.log('success');
+               if(response.success){
+                   window.location.href="/main";
+               }
+            },(request)=>{
+                let data=request.responseJSON;
+                if(null!=data.errors.username){
+                    $("#loginForm").find("input[name='username']").siblings("span").text(data.errors.username);
+                }else if(null!=data.errors.password){
+                    $("#loginForm").find("input[name='password']").siblings("span").text(data.errors.password);
+                }else{
+                    alert(data.errors.msg);
+                }
+            })
+
+        });
+        $("#registerBtn").on("click",function(){
+            window.location.href="/register";
+        })
+
+    </script>
+</body>
+</html>

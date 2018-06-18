@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录成功</title>
+</head>
+<body>
+    <h1>欢迎__username__访问</h1>
+    <div>Cookie特点</div>
+    <div>1、服务器通过Set-Cookie响应头设置Cookie</div>
+    <div>2、浏览器得到Cookie之后，每次请求都要带上Cookie</div>
+    <div>3、服务器读取Cookie就知道登录用户的信息</div>
+    <div>问题</div>
+    <div>1、Chrome登录得到Cookie，用Safari访问，Safari会带上Cookie吗？no</div>
+    <div>2、Cookie存在哪？Windows存在C盘的一个文件里</div>
+    <div>3、Cookie能假冒吗？yes.Cookie是不可信的，可以随意修改</div>
+    <div>4、Cookie有效期？默认有效期20分钟左右，浏览器自己决定；后端可以强制设置Cookie有效期</div>
+    <br>
+    <br>
+    <br>
+    <div>Cookie</div>
+    <div>1、服务器通过Set-Cookie头给客户端的一串字符串</div>
+    <div>2、客户端每次访问相同域名的网页时，必须带上这段字符串</div>
+    <div>3、客户端要在一定时间内保存这个Cookie</div>
+    <div>4、Cookie默认在用户关闭页面后就失效，后台代码可以任意设置Cookie的过期时间</div>
+    <br>
+    <div>Session</div>
+    <div>1、将SessionId通过Coookie发给客户端</div>
+    <div>2、客户端访问服务器时，服务器读取SessionId</div>
+    <div>3、服务器有一块内存（哈希表）保存了所有session</div>
+    <div>4、通过SessionId我们可以得到对应用户的隐私信息</div>
+    <div>5、这块内存（哈希表）就是服务器上的所有session</div>
+    <br>
+    <div>LocalStorage</div>
+    <div>1、LocalStorage根HTTP无关</div>
+    <div>2、HTTP不会带上LocalStorage的值</div>
+    <div>3、只有相同域名的页面才能互相读取LocalStorage(没有同源那么严格)</div>
+    <div>4、每个localStorage最大存储量为5Mb左右（每个浏览器都不一样）</div>
+    <div>5、常用场景：记录有没有提示过用户（没有用的信息，不能记录密码）</div>
+    <div>6、LocalStorage永久有效，除非用户清理缓存</div>
+    <br>
+    <div>SessionStorage</div>
+    <div>1\2\3\4\5同上</div>
+    <div>6、SessionStorage在用户关闭页面后就失效</div>
+    <br>
+    <div>Cookie和Session关系?</div>
+    <div>Session是基于Cookie实现的(Session也可以不基于Cookie)</div>
+    <br>
+    <div>Cookie和LocalStorage的区别？</div>
+    <div>1、Cookie跟HTTP有关，LocalStorage跟HTTP无关</div>
+    <div>2、Cookie和LocalStorage的存储大小</div>
+    <div>3、Cookie和LocalStorage的有效期</div>
+    <br>
+    <div>LocalStorage和SessionStorage的区别？</div>
+    <div>LocalStorage永久有效，除非用户清理缓存;SessionStorage在用户关闭页面后就失效</div>
+    <div>Cache-Control</div>
+    <div>response.setHeader('Cache-Control','max-age=300')</div>
+    <div>设置时间长度（优先使用）</div>
+    <div>Expires</div>
+    <div>response.setHeader('Expires','Mon, 18 Jun 2018 08:49:47 GMT')</div>
+    <div>设置时间点，本地时间</div>
+    <div>Etag</div>
+    <div>md5,摘要算法，文件变成一个字符串，如果文件修改了，md5值就变了</div>
+    <div>lastmodifined</div>
+    <div></div>
+    <div></div>
+     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</body>
+</html>
